@@ -16,19 +16,19 @@
 
 	context.One = (function One() {
 
-	return {
+		return {
 
-		one: "Hello world."
-	}
-})();
+			one: "Hello world."
+		}
+	})();
 
-context.Two = (function Two() {
+	context.Two = (function Two() {
 
-	return {
+		return {
 
-		two: "Eh up planet."
-	}
-})();
+			two: "Eh up planet."
+		}
+	})();
 
 	return context;
 });

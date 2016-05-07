@@ -12,8 +12,7 @@ module.exports = function(sourceRoot) {
 		")(function(context) {\n" +
 		"\n" +
 			"\tcontext = context || {};\n" +
-		"\n" +
-			"\t";
+		"\n";
 
 	var factories = [];
 
@@ -26,8 +25,11 @@ module.exports = function(sourceRoot) {
 
 	factories.forEach(function(factory) {
 
+		var factoryString =
+			factory.toString().replace(/\n/g, "\n\t").replace(/\n\t\n/g, "\n\n");
+
 		text +=
-			"context." + factory.name + " = (" + factory.toString() + ")();\n\n";
+			"\tcontext." + factory.name + " = (" + factoryString + ")();\n\n";
 	});
 
 	text += "\treturn context;\n});";

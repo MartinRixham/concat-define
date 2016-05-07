@@ -16,11 +16,11 @@
 
 	context.Hello = (function Hello() {
 
-	return {
+		return {
 
-		hello: "Hello world."
-	}
-})();
+			hello: "Hello world."
+		}
+	})();
 
 	return context;
 });
