@@ -32,7 +32,7 @@ module.exports = function(sourceRoot) {
 			"\tcontext." + factory.name + " = (" + factoryString + ")();\n\n";
 	});
 
-	text += "\treturn context;\n});";
+	text += "\treturn context;\n});\n";
 
 	return text;
 };
