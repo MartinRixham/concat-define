@@ -11,7 +11,7 @@
 
 	context = context || {};
 
-	context.One = (function One() {
+	context.One = (function () {
 
 		return {
 
@@ -19,7 +19,7 @@
 		}
 	})();
 
-	context.Two = (function Two() {
+	context.Two = (function () {
 
 		return {
 

@@ -11,7 +11,7 @@
 
 	context = context || {};
 
-	context.Hello = (function Hello() {
+	context.Hello = (function () {
 
 		return {
 

@@ -25,8 +25,16 @@ module.exports = function(sourceRoot) {
 
 	factories.forEach(function(factory) {
 
-		var factoryString =
-			factory.toString().replace(/\n/g, "\n\t").replace(/\n\t\n/g, "\n\n");
+		var factoryString = factory.toString();
+
+		// Add indent.
+		factoryString = factoryString.replace(/\n/g, "\n\t");
+
+		// Remove trailing indent.
+		factoryString = factoryString.replace(/\t\n/g, "\n");
+
+		// Remove factory name.
+		factoryString = factoryString.replace(/^function.*?\(/g, "function (");
 
 		text +=
 			"\tcontext." + factory.name + " = (" + factoryString + ")();\n\n";
