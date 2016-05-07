@@ -1,8 +1,6 @@
 module.exports = function(sourceRoot) {
 
-	var text = "";
-
-	text += "(";
+	var text = "(";
 
 	var header = require("./header");
 
@@ -14,16 +12,24 @@ module.exports = function(sourceRoot) {
 			"\tcontext = context || {};\n" +
 		"\n";
 
-	var factories = [];
+	var modules = [];
 
-	GLOBAL.define = function(factory) {
+	var Module = require("./Module");
 
-		factories.push(factory);
+	GLOBAL.define = function() {
+
+		var argumentArray = Array.prototype.slice.call(arguments);
+
+		modules.push(new Module(argumentArray.pop(), argumentArray.pop()));
 	};
 
 	require(sourceRoot);
 
-	factories.forEach(function(factory) {
+	var dependency = "";
+
+	modules.forEach(function(module) {
+
+		var factory = module.getFactory();
 
 		var factoryString = factory.toString();
 
@@ -36,8 +42,24 @@ module.exports = function(sourceRoot) {
 		// Remove factory name.
 		factoryString = factoryString.replace(/^function.*?\(/g, "function (");
 
-		text +=
-			"\tcontext." + factory.name + " = (" + factoryString + ")();\n\n";
+		if (factory.name) {
+
+			text += "\tcontext." + factory.name;
+		}
+		else {
+
+			text += "\tvar internal";
+			dependency = "internal";
+		}
+
+		text += " = (" + factoryString + ")(";
+
+		if (module.hasDependencies()) {
+
+			text += dependency;
+		}
+
+		text += ");\n\n";
 	});
 
 	text += "\treturn context;\n});\n";
