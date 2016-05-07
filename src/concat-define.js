@@ -13,16 +13,24 @@ module.exports = function(sourceRoot) {
 		"\n" +
 			"\tcontext = context || {};\n" +
 		"\n" +
-			"\tcontext.Hello = (";
+			"\t";
+
+	var factories = [];
 
 	GLOBAL.define = function(factory) {
 
-		text += factory.toString();
+		factories.push(factory);
 	};
 
 	require(sourceRoot);
 
-	text += ")();\n\n\treturn context;\n});";
+	factories.forEach(function(factory) {
+
+		text +=
+			"context." + factory.name + " = (" + factory.toString() + ")();\n\n";
+	});
+
+	text += "\treturn context;\n});";
 
 	return text;
 };
