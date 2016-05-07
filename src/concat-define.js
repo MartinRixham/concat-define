@@ -2,20 +2,14 @@ module.exports = function(sourceRoot) {
 
 	var text = "";
 
+	text += "(";
+
+	var header = require("./header");
+
+	text += header.toString();
+
 	text +=
-		"(function(factory) {\n" +
-		"\n" +
-			"\tif (typeof define === \"function\" && define.amd) {\n" +
-		"\n" +
-				"\t\tdefine(factory);\n" +
-			"\t} else if (typeof exports === \"object\" && typeof module === \"object\") {\n" +
-		"\n" +
-				"\t\tfactory(module.exports || exports);\n" +
-			"\t} else {\n" +
-		"\n" +
-				"\t\tfactory(window);\n" +
-			"\t}\n" +
-		"})(function(context) {\n" +
+		")(function(context) {\n" +
 		"\n" +
 			"\tcontext = context || {};\n" +
 		"\n" +
