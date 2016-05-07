@@ -1,10 +1,6 @@
 {
   "name": "concat-define",
-  "version": "0.0.0",
-  "description": "",
-  "directories": {
-    "test": "test"
-  },
+  "version": "0.1.0",
   "dependencies": {},
   "devDependencies": {
     "grunt-contrib-nodeunit": "~1.0.0",
@@ -17,7 +13,7 @@
     "url": "git://github.com/MartinRixham/concat-define.git"
   },
   "author": "Martin Rixham",
-  "license": "LGPL-3.0",
+  "license": "GPLv3",
   "bugs": {
     "url": "https://github.com/MartinRixham/concat-define/issues"
   }
