@@ -29,22 +29,9 @@ module.exports = function(sourceRoot) {
 
 	modules.forEach(function(module) {
 
-		var factory = module.getFactory();
+		if (module.hasName()) {
 
-		var factoryString = factory.toString();
-
-		// Add indent.
-		factoryString = factoryString.replace(/\n/g, "\n\t");
-
-		// Remove trailing indent.
-		factoryString = factoryString.replace(/\t\n/g, "\n");
-
-		// Remove factory name.
-		factoryString = factoryString.replace(/^function.*?\(/g, "function (");
-
-		if (factory.name) {
-
-			text += "\tcontext." + factory.name;
+			text += "\tcontext." + module.getName();
 		}
 		else {
 
@@ -52,7 +39,7 @@ module.exports = function(sourceRoot) {
 			dependency = "internal";
 		}
 
-		text += " = (" + factoryString + ")(";
+		text += " = (" + module.getFactoryString() + ")(";
 
 		if (module.hasDependencies()) {
 
