@@ -1,0 +1,8 @@
+{
+	"freeze": true,
+	"latedef": true,
+	"noarg": true,
+	"nocomma": true,
+	"nonbsp": true,
+	"unused": true
+}
