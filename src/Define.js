@@ -11,7 +11,7 @@ module.exports = function(sourceRoot) {
 			var argumentArray = Array.prototype.slice.call(arguments);
 
 			var module =
-				new Module(argumentArray.pop(), argumentArray.pop(), new Error());
+				new Module(argumentArray.pop(), argumentArray.pop() || [], new Error());
 
 			modules.push(module);
 		};

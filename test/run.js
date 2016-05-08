@@ -57,3 +57,18 @@ exports.functionWithTwoDependencies = function(test) {
 		test.done();
 	});
 };
+
+exports.dependencyChain = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var output = concat("../test/modules/chain");
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile("test/builds/chain.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};

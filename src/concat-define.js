@@ -35,10 +35,17 @@ module.exports = function(sourceRoot) {
 
 		text += " = (" + module.getFactoryString() + ")(";
 
-		if (module.hasDependencies()) {
+		var moduleDependencies = [];
 
-			text += dependencies.join(", ");
+		for (var i = 0; i < dependencies.length; i++) {
+
+			if (module.dependsOn(dependencies[i])) {
+
+				moduleDependencies.push(dependencies[i]);
+			}
 		}
+
+		text += moduleDependencies.join(", ");
 
 		text += ");\n\n";
 	});

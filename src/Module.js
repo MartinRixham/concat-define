@@ -1,10 +1,10 @@
 module.exports = function(factory, dependencies, error) {
 
+	var Path = require("./Path");
+
 	this.getName = function() {
 
 		var stack = getStack(error);
-
-		var Path = require("./Path");
 
 		var path = new Path(stack[1].getFileName());
 
@@ -50,8 +50,18 @@ module.exports = function(factory, dependencies, error) {
 		return factoryString;
 	};
 
-	this.hasDependencies = function() {
+	this.dependsOn = function(moduleName) {
 
-		return !!dependencies;
+		for (var i = 0; i < dependencies.length; i++) {
+
+			var dependencyName = new Path(dependencies[i]).getModuleName();
+
+			if (dependencyName == moduleName) {
+
+				return true;
+			}
+		}
+
+		return false;
 	};
 };
