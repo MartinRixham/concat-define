@@ -12,18 +12,9 @@ module.exports = function(sourceRoot) {
 			"\tcontext = context || {};\n" +
 		"\n";
 
-	var modules = [];
+	var Define = require("./Define");
 
-	var Module = require("./Module");
-
-	GLOBAL.define = function() {
-
-		var argumentArray = Array.prototype.slice.call(arguments);
-
-		modules.push(new Module(argumentArray.pop(), argumentArray.pop()));
-	};
-
-	require(sourceRoot);
+	var modules = new Define(sourceRoot).getModules();
 
 	var dependency = "";
 
