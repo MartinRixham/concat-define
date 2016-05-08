@@ -1,10 +1,12 @@
 module.exports = function(sourceRoot) {
 
+	var Module = require("./Module");
+
+	var Modules = require("./Modules");
+
 	this.getModules = function() {
 
 		var modules = [];
-
-		var Module = require("./Module");
 
 		GLOBAL.define = function() {
 
@@ -20,6 +22,6 @@ module.exports = function(sourceRoot) {
 
 		delete GLOBAL.define;
 
-		return modules;
+		return new Modules(modules);
 	};
 };

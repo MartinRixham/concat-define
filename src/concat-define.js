@@ -16,21 +16,9 @@ module.exports = function(sourceRoot) {
 
 	var modules = new Define(sourceRoot).getModules();
 
-	modules.forEach(function(module) {
+	modules.getModuleStrings().forEach(function(moduleString) {
 
-		text += "\t" + module.getFactoryString();
-
-		var dependencies = [];
-
-		for (var i = 0; i < modules.length; i++) {
-
-			if (module.dependsOn(modules[i])) {
-
-				dependencies.push(modules[i].getIdentifier());
-			}
-		}
-
-		text += "(" + dependencies.join(", ") + ");\n\n";
+		text += "\t" + moduleString + "\n\n";
 	});
 
 	text += "\treturn context;\n});\n";
