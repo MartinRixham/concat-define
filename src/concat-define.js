@@ -16,46 +16,21 @@ module.exports = function(sourceRoot) {
 
 	var modules = new Define(sourceRoot).getModules();
 
-	var dependencies = [];
-
 	modules.forEach(function(module) {
 
-		if (module.isPublic()) {
+		text += "\t" + module.getFactoryString();
 
-			var publicName = module.getPublicName();
+		var dependencies = [];
 
-			text += "\tcontext." + publicName;
+		for (var i = 0; i < modules.length; i++) {
 
-			dependencies.push({
+			if (module.dependsOn(modules[i])) {
 
-				name: module.getName(),
-				identifier: "context." + publicName
-			});
-		}
-		else {
-
-			var name = module.getName();
-
-			text += "\tvar " + name;
-
-			dependencies.push({ name: name, identifier: name });
-		}
-
-		text += " = (" + module.getFactoryString() + ")(";
-
-		var moduleDependencies = [];
-
-		for (var i = 0; i < dependencies.length; i++) {
-
-			if (module.dependsOn(dependencies[i].name)) {
-
-				moduleDependencies.push(dependencies[i].identifier);
+				dependencies.push(modules[i].getIdentifier());
 			}
 		}
 
-		text += moduleDependencies.join(", ");
-
-		text += ");\n\n";
+		text += "(" + dependencies.join(", ") + ");\n\n";
 	});
 
 	text += "\treturn context;\n});\n";
