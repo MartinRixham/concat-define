@@ -22,7 +22,15 @@ module.exports = function(sourceRoot) {
 
 		if (module.isPublic()) {
 
-			text += "\tcontext." + module.getPublicName();
+			var publicName = module.getPublicName();
+
+			text += "\tcontext." + publicName;
+
+			dependencies.push({
+
+				name: module.getName(),
+				identifier: "context." + publicName
+			});
 		}
 		else {
 
@@ -30,7 +38,7 @@ module.exports = function(sourceRoot) {
 
 			text += "\tvar " + name;
 
-			dependencies.push(name);
+			dependencies.push({ name: name, identifier: name });
 		}
 
 		text += " = (" + module.getFactoryString() + ")(";
@@ -39,9 +47,9 @@ module.exports = function(sourceRoot) {
 
 		for (var i = 0; i < dependencies.length; i++) {
 
-			if (module.dependsOn(dependencies[i])) {
+			if (module.dependsOn(dependencies[i].name)) {
 
-				moduleDependencies.push(dependencies[i]);
+				moduleDependencies.push(dependencies[i].identifier);
 			}
 		}
 

@@ -1,4 +1,4 @@
-exports.testPrintingFunction = function(test) {
+exports.testPrintingModule = function(test) {
 
 	var concat = require("../src/concat-define");
 
@@ -13,7 +13,7 @@ exports.testPrintingFunction = function(test) {
 	});
 };
 
-exports.testPrintingTwoFunctions = function(test) {
+exports.testPrintingTwoModules = function(test) {
 
 	var concat = require("../src/concat-define");
 
@@ -28,7 +28,7 @@ exports.testPrintingTwoFunctions = function(test) {
 	});
 };
 
-exports.testOneFunctionDependingOnAnother = function(test) {
+exports.testOneModuleDependingOnAnother = function(test) {
 
 	var concat = require("../src/concat-define");
 
@@ -43,7 +43,7 @@ exports.testOneFunctionDependingOnAnother = function(test) {
 	});
 };
 
-exports.functionWithTwoDependencies = function(test) {
+exports.moduleWithTwoDependencies = function(test) {
 
 	var concat = require("../src/concat-define");
 
@@ -67,6 +67,21 @@ exports.dependencyChain = function(test) {
 	var fileSystem = require("fs");
 
 	fileSystem.readFile("test/builds/chain.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};
+
+exports.dependOnPublicModule = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var output = concat("../test/modules/dependPublic");
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile("test/builds/dependPublic.js", "utf-8", function(error, data) {
 
 		test.strictEqual(output, data);
 		test.done();
