@@ -42,3 +42,18 @@ exports.testOneFunctionDependingOnAnother = function(test) {
 		test.done();
 	});
 };
+
+exports.functionWithTwoDependencies = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var output = concat("../test/modules/dependTwice");
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile("test/builds/dependTwice.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};

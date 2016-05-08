@@ -16,25 +16,28 @@ module.exports = function(sourceRoot) {
 
 	var modules = new Define(sourceRoot).getModules();
 
-	var dependency = "";
+	var dependencies = [];
 
 	modules.forEach(function(module) {
 
-		if (module.hasName()) {
+		if (module.isPublic()) {
 
-			text += "\tcontext." + module.getName();
+			text += "\tcontext." + module.getPublicName();
 		}
 		else {
 
-			text += "\tvar internal";
-			dependency = "internal";
+			var name = module.getName();
+
+			text += "\tvar " + name;
+
+			dependencies.push(name);
 		}
 
 		text += " = (" + module.getFactoryString() + ")(";
 
 		if (module.hasDependencies()) {
 
-			text += dependency;
+			text += dependencies.join(", ");
 		}
 
 		text += ");\n\n";

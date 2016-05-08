@@ -10,7 +10,10 @@ module.exports = function(sourceRoot) {
 
 			var argumentArray = Array.prototype.slice.call(arguments);
 
-			modules.push(new Module(argumentArray.pop(), argumentArray.pop()));
+			var module =
+				new Module(argumentArray.pop(), argumentArray.pop(), new Error());
+
+			modules.push(module);
 		};
 
 		require(sourceRoot);
