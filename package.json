@@ -14,7 +14,7 @@
     "url": "git://github.com/MartinRixham/concat-define.git"
   },
   "author": "Martin Rixham",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/MartinRixham/concat-define/issues"
   }

@@ -8,7 +8,7 @@ module.exports = function(sourceRoot) {
 
 		var modules = [];
 
-		GLOBAL.define = function() {
+		global.define = function() {
 
 			var argumentArray = Array.prototype.slice.call(arguments);
 
@@ -20,7 +20,7 @@ module.exports = function(sourceRoot) {
 
 		require(sourceRoot);
 
-		delete GLOBAL.define;
+		delete global.define;
 
 		return new Modules(modules);
 	};
