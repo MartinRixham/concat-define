@@ -8,17 +8,9 @@ module.exports = function(modules) {
 
 			var moduleString = module.getFactoryString();
 
-			var dependencies = [];
+			var dependencyIdentifiers = module.getDependencyIdentifiers(modules);
 
-			for (var i = 0; i < modules.length; i++) {
-
-				if (module.dependsOn(modules[i])) {
-
-					dependencies.push(modules[i].getIdentifier());
-				}
-			}
-
-			moduleString += "(" + dependencies.join(", ") + ");";
+			moduleString += "(" + dependencyIdentifiers.join(", ") + ");";
 
 			moduleStrings.push(moduleString);
 		});

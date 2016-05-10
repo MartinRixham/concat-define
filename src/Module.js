@@ -54,19 +54,26 @@ module.exports = function(factory, dependencies, error) {
 		return factory.name;
 	}
 
-	this.dependsOn = function(other) {
+	this.getDependencyIdentifiers = function(modules) {
+
+		var dependencyIdentifiers = [];
 
 		for (var i = 0; i < dependencies.length; i++) {
 
 			var dependencyName = new Path(dependencies[i]).getModuleName();
 
-			if (dependencyName == other.getName()) {
+			for (var j = 0; j < modules.length; j++) {
 
-				return true;
+				var module = modules[j];
+
+				if (dependencyName == module.getName()) {
+
+					dependencyIdentifiers.push(module.getIdentifier());
+				}
 			}
 		}
 
-		return false;
+		return dependencyIdentifiers;
 	};
 
 	this.getName = function() {

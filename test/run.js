@@ -87,3 +87,18 @@ exports.dependOnPublicModule = function(test) {
 		test.done();
 	});
 };
+
+exports.testModulesRequiredInReverseOrder = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var output = concat("../test/modules/dependReverse");
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile("test/builds/dependReverse.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};
