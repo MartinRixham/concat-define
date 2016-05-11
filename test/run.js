@@ -1,3 +1,13 @@
+exports.tearDown = function(callback) {
+
+	for (var key in require.cache) {
+
+		delete require.cache[key];
+	}
+
+	callback();
+};
+
 exports.testPrintingModule = function(test) {
 
 	var concat = require("../src/concat-define");
@@ -42,6 +52,27 @@ exports.testOneModuleDependingOnAnother = function(test) {
 		[
 			"../test/modules/depend/internal",
 			"../test/modules/depend/public"
+		];
+
+	var output = concat(modules);
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile("test/builds/depend.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};
+
+exports.testPassingModulesInWrongOrder = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var modules =
+		[
+			"../test/modules/depend/public",
+			"../test/modules/depend/internal"
 		];
 
 	var output = concat(modules);

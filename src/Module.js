@@ -97,4 +97,35 @@ module.exports = function(factory, dependencies, error) {
 
 		return stack;
 	}
+
+	this.compareTo = function(other) {
+
+		if (this.dependsOn(other)) {
+
+			return 1;
+		}
+		else if (other.dependsOn(this)) {
+
+			return -1;
+		}
+		else {
+
+			return 0;
+		}
+	};
+
+	this.dependsOn = function(other) {
+
+		for (var i = 0; i < dependencies.length; i++) {
+
+			var dependencyName = new Path(dependencies[i]).getModuleName();
+
+			if (dependencyName == other.getName()) {
+
+				return true;
+			}
+		}
+
+		return false;
+	};
 };
