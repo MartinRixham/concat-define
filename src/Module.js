@@ -1,6 +1,4 @@
-module.exports = function(factory, dependencies, error) {
-
-	var Path = require("./Path");
+module.exports = function(factory, dependencies, name) {
 
 	this.getIdentifier = function() {
 
@@ -10,7 +8,7 @@ module.exports = function(factory, dependencies, error) {
 		}
 		else {
 
-			return this.getName();
+			return name;
 		}
 	};
 
@@ -30,8 +28,6 @@ module.exports = function(factory, dependencies, error) {
 		return getAssignment() + "(" + factoryString + ")";
 	};
 
-	var self = this;
-
 	function getAssignment() {
 
 		if (isPublic()) {
@@ -40,7 +36,7 @@ module.exports = function(factory, dependencies, error) {
 		}
 		else {
 
-			return "var " + self.getName() + " = ";
+			return "var " + name + " = ";
 		}
 	}
 
@@ -54,49 +50,15 @@ module.exports = function(factory, dependencies, error) {
 		return factory.name;
 	}
 
-	this.getDependencyIdentifiers = function(modules) {
+	this.getDependencyIdentifiers = function() {
 
-		var dependencyIdentifiers = [];
-
-		for (var i = 0; i < dependencies.length; i++) {
-
-			var dependencyName = new Path(dependencies[i]).getModuleName();
-
-			for (var j = 0; j < modules.length; j++) {
-
-				var module = modules[j];
-
-				if (dependencyName == module.getName()) {
-
-					dependencyIdentifiers.push(module.getIdentifier());
-				}
-			}
-		}
-
-		return dependencyIdentifiers;
+		return dependencies.getIdentifiers();
 	};
 
 	this.getName = function() {
 
-		var stack = getStack(error);
-
-		var path = new Path(stack[1].getFileName());
-
-		return path.getModuleName();
+		return name;
 	};
-
-	function getStack(error) {
-
-		var originalPrepareStackTrace = Error.prepareStackTrace;
-
-		Error.prepareStackTrace = function(error, stack) { return stack; };
-
-		var stack = error.stack;
-
-		Error.prepareStackTrace = originalPrepareStackTrace;
-
-		return stack;
-	}
 
 	this.compareTo = function(other) {
 
@@ -116,16 +78,6 @@ module.exports = function(factory, dependencies, error) {
 
 	this.dependsOn = function(other) {
 
-		for (var i = 0; i < dependencies.length; i++) {
-
-			var dependencyName = new Path(dependencies[i]).getModuleName();
-
-			if (dependencyName == other.getName()) {
-
-				return true;
-			}
-		}
-
-		return false;
+		return this == other || dependencies.dependOn(other);
 	};
 };

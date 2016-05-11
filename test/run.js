@@ -130,6 +130,28 @@ exports.dependencyChain = function(test) {
 	});
 };
 
+exports.dependencyChainBackwards = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var modules =
+		[
+			"../test/modules/chain/public",
+			"../test/modules/chain/secondInternal",
+			"../test/modules/chain/firstInternal"
+		];
+
+	var output = concat(modules);
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile("test/builds/chain.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};
+
 exports.dependOnPublicModule = function(test) {
 
 	var concat = require("../src/concat-define");
