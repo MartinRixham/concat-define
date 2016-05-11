@@ -1,4 +1,4 @@
-module.exports = function(sourceRoot) {
+module.exports = function(sourceModules) {
 
 	var text = "(";
 
@@ -14,7 +14,7 @@ module.exports = function(sourceRoot) {
 
 	var Define = require("./Define");
 
-	var modules = new Define(sourceRoot).getModules();
+	var modules = new Define(sourceModules).getModules();
 
 	modules.getModuleStrings().forEach(function(moduleString) {
 

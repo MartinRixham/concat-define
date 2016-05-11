@@ -1,4 +1,4 @@
-module.exports = function(sourceRoot) {
+module.exports = function(sourceModules) {
 
 	var Module = require("./Module");
 
@@ -18,7 +18,7 @@ module.exports = function(sourceRoot) {
 			modules.push(module);
 		};
 
-		require(sourceRoot);
+		sourceModules.forEach(function(module) { require(module); });
 
 		delete global.define;
 

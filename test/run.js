@@ -2,7 +2,7 @@ exports.testPrintingModule = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var output = concat("../test/modules/print");
+	var output = concat(["../test/modules/print/index"]);
 
 	var fileSystem = require("fs");
 
@@ -17,7 +17,13 @@ exports.testPrintingTwoModules = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var output = concat("../test/modules/two");
+	var modules =
+		[
+			"../test/modules/two/one",
+			"../test/modules/two/two"
+		];
+
+	var output = concat(modules);
 
 	var fileSystem = require("fs");
 
@@ -32,7 +38,13 @@ exports.testOneModuleDependingOnAnother = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var output = concat("../test/modules/depend");
+	var modules =
+		[
+			"../test/modules/depend/internal",
+			"../test/modules/depend/public"
+		];
+
+	var output = concat(modules);
 
 	var fileSystem = require("fs");
 
@@ -47,7 +59,14 @@ exports.moduleWithTwoDependencies = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var output = concat("../test/modules/dependTwice");
+	var modules =
+		[
+			"../test/modules/dependTwice/firstInternal",
+			"../test/modules/dependTwice/secondInternal",
+			"../test/modules/dependTwice/public"
+		];
+
+	var output = concat(modules);
 
 	var fileSystem = require("fs");
 
@@ -62,7 +81,14 @@ exports.dependencyChain = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var output = concat("../test/modules/chain");
+	var modules =
+		[
+			"../test/modules/chain/firstInternal",
+			"../test/modules/chain/secondInternal",
+			"../test/modules/chain/public"
+		];
+
+	var output = concat(modules);
 
 	var fileSystem = require("fs");
 
@@ -77,7 +103,13 @@ exports.dependOnPublicModule = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var output = concat("../test/modules/dependPublic");
+	var modules =
+		[
+			"../test/modules/dependPublic/first",
+			"../test/modules/dependPublic/second"
+		];
+
+	var output = concat(modules);
 
 	var fileSystem = require("fs");
 
@@ -92,7 +124,14 @@ exports.testModulesRequiredInReverseOrder = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var output = concat("../test/modules/dependReverse");
+	var modules =
+		[
+			"../test/modules/dependReverse/secondInternal",
+			"../test/modules/dependReverse/firstInternal",
+			"../test/modules/dependReverse/public"
+		];
+
+	var output = concat(modules);
 
 	var fileSystem = require("fs");
 
