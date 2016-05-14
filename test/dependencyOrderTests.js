@@ -218,25 +218,24 @@ exports.testMultipleModuleDependencies = function(test) {
 	});
 };
 
-exports.testLoop = function(test) {
-
+exports.testEdgeCase = function(test) {
 
 	var concat = require("../src/concat-define");
 
 	var modules =
 		[
-			"../test/modules/loop/One",
-			"../test/modules/loop/Two",
-			"../test/modules/loop/Three",
-			"../test/modules/loop/Four",
-			"../test/modules/loop/Five"
+			"../test/modules/edge/One",
+			"../test/modules/edge/Two",
+			"../test/modules/edge/Three",
+			"../test/modules/edge/Four",
+			"../test/modules/edge/Five"
 		];
 
 	var output = concat(modules);
 
 	var fileSystem = require("fs");
 
-	fileSystem.readFile("test/builds/loop.js", "utf-8", function(error, data) {
+	fileSystem.readFile("test/builds/edge.js", "utf-8", function(error, data) {
 
 		test.strictEqual(output, data);
 		test.done();

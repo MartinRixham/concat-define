@@ -62,11 +62,24 @@ module.exports = function(factory, dependencies, name) {
 
 	this.compareTo = function(other) {
 
-		if (this.dependsOn(other)) {
+		var dependsForwards = this.dependsOn(other);
+		var dependsBackwards = other.dependsOn(this);
+
+		if (dependsForwards && dependsBackwards) {
+
+			var message =
+				this.getName() +
+				" and " +
+				other.getName() +
+				" are vertices on a dependency cycle.";
+
+			throw new Error(message);
+		}
+		else if (dependsForwards) {
 
 			return 1;
 		}
-		else if (other.dependsOn(this)) {
+		else if (dependsBackwards) {
 
 			return -1;
 		}
