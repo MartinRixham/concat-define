@@ -194,3 +194,26 @@ exports.testModulesRequiredInReverseOrder = function(test) {
 		test.done();
 	});
 };
+
+exports.testMultipleModuleDependencies = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var modules =
+		[
+			"../test/modules/multiple/One",
+			"../test/modules/multiple/Two",
+			"../test/modules/multiple/Three",
+			"../test/modules/multiple/Four"
+		];
+
+	var output = concat(modules);
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile("test/builds/multiple.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};

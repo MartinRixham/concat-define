@@ -72,6 +72,8 @@ module.exports = function(factory, dependencies, name) {
 		}
 		else {
 
+			this.setEqualTo(other);
+
 			return 0;
 		}
 	};
@@ -79,5 +81,16 @@ module.exports = function(factory, dependencies, name) {
 	this.dependsOn = function(other) {
 
 		return this == other || dependencies.dependOn(other);
+	};
+
+	this.setEqualTo = function(equal) {
+
+		var originalDependsOn = this.dependsOn;
+		var equalOriginalDependsOn = equal.dependsOn;
+
+		equal.dependsOn = this.dependsOn = function(other) {
+
+			return originalDependsOn(other) || equalOriginalDependsOn(other);
+		};
 	};
 };
