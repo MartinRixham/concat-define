@@ -217,3 +217,28 @@ exports.testMultipleModuleDependencies = function(test) {
 		test.done();
 	});
 };
+
+exports.testLoop = function(test) {
+
+
+	var concat = require("../src/concat-define");
+
+	var modules =
+		[
+			"../test/modules/loop/One",
+			"../test/modules/loop/Two",
+			"../test/modules/loop/Three",
+			"../test/modules/loop/Four",
+			"../test/modules/loop/Five"
+		];
+
+	var output = concat(modules);
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile("test/builds/loop.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};

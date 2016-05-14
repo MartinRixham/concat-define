@@ -78,9 +78,11 @@ module.exports = function(factory, dependencies, name) {
 		}
 	};
 
+	var self = this;
+
 	this.dependsOn = function(other) {
 
-		return this == other || dependencies.dependOn(other);
+		return self == other || dependencies.dependOn(other);
 	};
 
 	this.setEqualTo = function(equal) {
