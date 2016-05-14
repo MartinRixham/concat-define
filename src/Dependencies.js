@@ -15,6 +15,12 @@ module.exports = function(dependencyPaths, modules) {
 				if (dependencyName == module.getName()) {
 
 					dependencyIdentifiers.push(module.getIdentifier());
+
+					break;
+				}
+				else if (j == modules.length - 1) {
+
+					throw new Error("Could not find module " + dependencyName + ".");
 				}
 			}
 		}

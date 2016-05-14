@@ -34,3 +34,24 @@ exports.testPrintingTwoModules = function(test) {
 		test.done();
 	}
 };
+
+exports.testMissingModule = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var errorMessage;
+
+	try {
+
+		concat(["../test/modules/missing/One"]);
+	}
+	catch (error) {
+
+		errorMessage = error.message;
+	}
+	finally {
+
+		test.strictEqual(errorMessage, "Could not find module thingy.");
+		test.done();
+	}
+};

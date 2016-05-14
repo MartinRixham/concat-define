@@ -68,7 +68,7 @@ module.exports = function(factory, dependencies, name) {
 		if (dependsForwards && dependsBackwards) {
 
 			var message =
-				this.getName() +
+				name +
 				" and " +
 				other.getName() +
 				" are vertices on a dependency cycle.";
