@@ -28,13 +28,14 @@
 	"requireLineFeedAtFileEnd": true,
 	"requireOperatorBeforeLineBreak": true,
 	"requireSemicolons": true,
-	"requireSpaceBeforeBinaryOperators": true,
 	"requireSpaceAfterBinaryOperators": true,
+	"requireSpaceBeforeBinaryOperators": true,
+	"requireSpaceBetweenArguments": true,
 	"requireSpacesInFunctionExpression": { "beforeOpeningCurlyBrace": true },
 	"requireSpacesInsideObjectBrackets": "all",
 	"requireSpaceAfterLineComment": true,
 	"validateCommentPosition": { "position": "above" },
 	"validateIndentation": "\t",
-	"validateQuoteMarks": "\"",
-	"validateParameterSeparator": ", "
+	"validateParameterSeparator": ", ",
+	"validateQuoteMarks": "\""
 }

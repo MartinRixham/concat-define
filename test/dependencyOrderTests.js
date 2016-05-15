@@ -12,7 +12,7 @@ exports.testPrintingModule = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var output = concat(["../test/modules/print/index"]);
+	var output = concat("../test/modules/print", ["index"]);
 
 	var fileSystem = require("fs");
 
@@ -27,13 +27,9 @@ exports.testPrintingTwoModules = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var modules =
-		[
-			"../test/modules/two/one",
-			"../test/modules/two/two"
-		];
+	var modules = ["one", "two"];
 
-	var output = concat(modules);
+	var output = concat("../test/modules/two", modules);
 
 	var fileSystem = require("fs");
 
@@ -48,13 +44,9 @@ exports.testOneModuleDependingOnAnother = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var modules =
-		[
-			"../test/modules/depend/internal",
-			"../test/modules/depend/public"
-		];
+	var modules = ["internal", "public"];
 
-	var output = concat(modules);
+	var output = concat("../test/modules/depend", modules);
 
 	var fileSystem = require("fs");
 
@@ -69,13 +61,9 @@ exports.testPassingModulesInWrongOrder = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var modules =
-		[
-			"../test/modules/depend/public",
-			"../test/modules/depend/internal"
-		];
+	var modules = ["public", "internal"];
 
-	var output = concat(modules);
+	var output = concat("../test/modules/depend", modules);
 
 	var fileSystem = require("fs");
 
@@ -90,14 +78,9 @@ exports.moduleWithTwoDependencies = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var modules =
-		[
-			"../test/modules/dependTwice/firstInternal",
-			"../test/modules/dependTwice/secondInternal",
-			"../test/modules/dependTwice/public"
-		];
+	var modules = ["firstInternal", "secondInternal", "public"];
 
-	var output = concat(modules);
+	var output = concat("../test/modules/dependTwice", modules);
 
 	var fileSystem = require("fs");
 
@@ -112,14 +95,9 @@ exports.dependencyChain = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var modules =
-		[
-			"../test/modules/chain/firstInternal",
-			"../test/modules/chain/secondInternal",
-			"../test/modules/chain/public"
-		];
+	var modules = ["firstInternal", "secondInternal", "public"];
 
-	var output = concat(modules);
+	var output = concat("../test/modules/chain", modules);
 
 	var fileSystem = require("fs");
 
@@ -134,14 +112,9 @@ exports.dependencyChainBackwards = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var modules =
-		[
-			"../test/modules/chain/public",
-			"../test/modules/chain/secondInternal",
-			"../test/modules/chain/firstInternal"
-		];
+	var modules = ["public", "secondInternal", "firstInternal"];
 
-	var output = concat(modules);
+	var output = concat("../test/modules/chain", modules);
 
 	var fileSystem = require("fs");
 
@@ -156,13 +129,9 @@ exports.dependOnPublicModule = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var modules =
-		[
-			"../test/modules/dependPublic/first",
-			"../test/modules/dependPublic/second"
-		];
+	var modules = ["first", "second"];
 
-	var output = concat(modules);
+	var output = concat("../test/modules/dependPublic", modules);
 
 	var fileSystem = require("fs");
 
@@ -177,14 +146,9 @@ exports.testModulesRequiredInReverseOrder = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var modules =
-		[
-			"../test/modules/dependReverse/secondInternal",
-			"../test/modules/dependReverse/firstInternal",
-			"../test/modules/dependReverse/public"
-		];
+	var modules = ["secondInternal", "firstInternal", "public"];
 
-	var output = concat(modules);
+	var output = concat("../test/modules/dependReverse", modules);
 
 	var fileSystem = require("fs");
 
@@ -199,15 +163,9 @@ exports.testMultipleModuleDependencies = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var modules =
-		[
-			"../test/modules/multiple/One",
-			"../test/modules/multiple/Two",
-			"../test/modules/multiple/Three",
-			"../test/modules/multiple/Four"
-		];
+	var modules = ["One", "Two", "Three", "Four"];
 
-	var output = concat(modules);
+	var output = concat("../test/modules/multiple", modules);
 
 	var fileSystem = require("fs");
 
@@ -222,16 +180,9 @@ exports.testEdgeCase = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var modules =
-		[
-			"../test/modules/edge/One",
-			"../test/modules/edge/Two",
-			"../test/modules/edge/Three",
-			"../test/modules/edge/Four",
-			"../test/modules/edge/Five"
-		];
+	var modules = ["One", "Two", "Three", "Four", "Five"];
 
-	var output = concat(modules);
+	var output = concat("../test/modules/edge", modules);
 
 	var fileSystem = require("fs");
 

@@ -1,6 +1,8 @@
-module.exports = function(sourceModules) {
+module.exports = function(rootDirectory, moduleFiles) {
 
-	var Path = require("./Path");
+	var FilePath = require("./FilePath");
+
+	var ModulePath = require("./ModulePath");
 
 	var Dependencies = require("./Dependencies");
 
@@ -20,31 +22,33 @@ module.exports = function(sourceModules) {
 
 			var dependencyPaths = argumentArray.pop() || [];
 
-			var paths = dependencyPaths.map(function(path) { return new Path(path); });
+			var paths =
+				dependencyPaths.map(function(path) { return new ModulePath(path); });
 
 			var module =
 				new Module(
 					factory,
 					new Dependencies(paths, modules),
-					getModuleName(new Error()));
+					getFilePath(new Error()));
 
 			modules.push(module);
 		};
 
-		sourceModules.forEach(function(module) { require(module); });
+		moduleFiles.forEach(function(file) {
+
+			require(require("path").join(rootDirectory, file));
+		});
 
 		delete global.define;
 
 		return new Modules(modules.slice());
 	};
 
-	function getModuleName(error) {
+	function getFilePath(error) {
 
 		var stack = getStack(error);
 
-		var path = new Path(stack[1].getFileName());
-
-		return path.getModuleName();
+		return new FilePath(stack[1].getFileName(), rootDirectory);
 	}
 
 	function getStack(error) {

@@ -1,4 +1,4 @@
-module.exports = function(factory, dependencies, name) {
+module.exports = function(factory, dependencies, path) {
 
 	this.getIdentifier = function() {
 
@@ -8,7 +8,7 @@ module.exports = function(factory, dependencies, name) {
 		}
 		else {
 
-			return name;
+			return path.getModuleName();
 		}
 	};
 
@@ -36,7 +36,7 @@ module.exports = function(factory, dependencies, name) {
 		}
 		else {
 
-			return "var " + name + " = ";
+			return "var " + path.getModuleName() + " = ";
 		}
 	}
 
@@ -57,7 +57,12 @@ module.exports = function(factory, dependencies, name) {
 
 	this.getName = function() {
 
-		return name;
+		return path.getModuleName();
+	};
+
+	this.hasPath = function(other) {
+
+		return other.getModuleName() == path.getModuleName();
 	};
 
 	this.compareTo = function(other) {
@@ -68,7 +73,7 @@ module.exports = function(factory, dependencies, name) {
 		if (dependsForwards && dependsBackwards) {
 
 			var message =
-				name +
+				path.getModuleName() +
 				" and " +
 				other.getName() +
 				" are vertices on a dependency cycle.";

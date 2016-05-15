@@ -2,30 +2,12 @@ module.exports = function(dependencyPaths, modules) {
 
 	this.getIdentifiers = function() {
 
-		var dependencyIdentifiers = [];
+		var dependencies = getDependencyModules();
 
-		for (var i = 0; i < dependencyPaths.length; i++) {
+		return dependencies.map(function(module) {
 
-			var dependencyName = dependencyPaths[i].getModuleName();
-
-			for (var j = 0; j < modules.length; j++) {
-
-				var module = modules[j];
-
-				if (dependencyName == module.getName()) {
-
-					dependencyIdentifiers.push(module.getIdentifier());
-
-					break;
-				}
-				else if (j == modules.length - 1) {
-
-					throw new Error("Could not find module " + dependencyName + ".");
-				}
-			}
-		}
-
-		return dependencyIdentifiers;
+			return module.getIdentifier();
+		});
 	};
 
 	this.dependOn = function(other) {
@@ -49,15 +31,26 @@ module.exports = function(dependencyPaths, modules) {
 
 		for (var i = 0; i < dependencyPaths.length; i++) {
 
-			var dependencyName = dependencyPaths[i].getModuleName();
+			var path = dependencyPaths[i];
 
 			for (var j = 0; j < modules.length; j++) {
 
 				var module = modules[j];
 
-				if (dependencyName == module.getName()) {
+				if (module.hasPath(path)) {
 
 					dependencyModules.push(module);
+
+					break;
+				}
+				else if (j == modules.length - 1) {
+
+					var message =
+						"Could not find module " +
+						path.getModuleName() +
+						".";
+
+					throw new Error(message);
 				}
 			}
 		}

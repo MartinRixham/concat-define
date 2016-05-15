@@ -12,17 +12,13 @@ exports.testPrintingTwoModules = function(test) {
 
 	var concat = require("../src/concat-define");
 
-	var modules =
-		[
-			"../test/modules/circular/One",
-			"../test/modules/circular/Two"
-		];
+	var modules = ["One", "Two"];
 
 	var errorMessage;
 
 	try {
 
-		concat(modules);
+		concat("../test/modules/circular", modules);
 	}
 	catch (error) {
 
@@ -43,7 +39,7 @@ exports.testMissingModule = function(test) {
 
 	try {
 
-		concat(["../test/modules/missing/One"]);
+		concat("../test/modules/missing", ["One"]);
 	}
 	catch (error) {
 
@@ -52,6 +48,29 @@ exports.testMissingModule = function(test) {
 	finally {
 
 		test.strictEqual(errorMessage, "Could not find module thingy.");
+		test.done();
+	}
+};
+
+exports.testModuleInWrongDirectory = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var modules = ["public", "internal"];
+
+	var errorMessage;
+
+	try {
+
+		concat("../test/modules/wrongDirectory", modules);
+	}
+	catch (error) {
+
+		errorMessage = error.message;
+	}
+	finally {
+
+		test.strictEqual(errorMessage, "Could not find module ../internal.");
 		test.done();
 	}
 };
