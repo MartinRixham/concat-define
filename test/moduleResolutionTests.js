@@ -74,3 +74,20 @@ exports.testModuleInWrongDirectory = function(test) {
 		test.done();
 	}
 };
+
+exports.testModuleInSubdirectory = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var modules = ["internal", "sub/internal", "public"];
+
+	var output = concat("../test/modules/subdirectory", modules);
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile("test/builds/subdirectory.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};

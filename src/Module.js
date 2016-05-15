@@ -8,7 +8,7 @@ module.exports = function(factory, dependencies, path) {
 		}
 		else {
 
-			return path.getModuleName();
+			return path.getModuleName().replace("/", "_");
 		}
 	};
 
@@ -36,7 +36,7 @@ module.exports = function(factory, dependencies, path) {
 		}
 		else {
 
-			return "var " + path.getModuleName() + " = ";
+			return "var " + path.getModuleName().replace("/", "_") + " = ";
 		}
 	}
 
