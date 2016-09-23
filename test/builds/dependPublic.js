@@ -3,9 +3,12 @@
 	if (typeof define === "function" && define.amd) {
 
 		define(factory);
+	} else if (typeof module === "object" && module.exports) {
+
+		factory(module.exports);
 	} else {
 
-		factory(window);
+		factory(this);
 	}
 })(function(context) {
 
