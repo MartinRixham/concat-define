@@ -1,4 +1,4 @@
-module.exports = function(rootDirectory, moduleFiles) {
+module.exports = function(rootDirectory, moduleFiles, mainFunction) {
 
 	var text = "(";
 
@@ -6,10 +6,22 @@ module.exports = function(rootDirectory, moduleFiles) {
 
 	text += header.toString();
 
+	var context;
+
+	if (mainFunction) {
+
+		context =
+			"function() { return context." + mainFunction + ".apply(this, arguments); }";
+	}
+	else {
+
+		context = "{}";
+	}
+
 	text +=
 		")(function(context) {\n" +
 		"\n" +
-			"\tcontext = context || {};\n" +
+			"\tcontext = context || " + context + ";\n" +
 		"\n";
 
 	var Define = require("./Define");

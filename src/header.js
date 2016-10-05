@@ -5,7 +5,7 @@ module.exports = function(factory) {
 		define(factory);
 	} else if (typeof module === "object" && module.exports) {
 
-		factory(module.exports);
+		module.exports = factory();
 	} else {
 
 		factory(this);

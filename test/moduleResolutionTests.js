@@ -11,9 +11,7 @@ exports.tearDown = function(callback) {
 exports.testPrintingTwoModules = function(test) {
 
 	var concat = require("../src/concat-define");
-
 	var modules = ["One", "Two"];
-
 	var errorMessage;
 
 	try {
@@ -34,7 +32,6 @@ exports.testPrintingTwoModules = function(test) {
 exports.testMissingModule = function(test) {
 
 	var concat = require("../src/concat-define");
-
 	var errorMessage;
 
 	try {
@@ -55,9 +52,7 @@ exports.testMissingModule = function(test) {
 exports.testModuleInWrongDirectory = function(test) {
 
 	var concat = require("../src/concat-define");
-
 	var modules = ["public", "internal"];
-
 	var errorMessage;
 
 	try {
@@ -78,11 +73,8 @@ exports.testModuleInWrongDirectory = function(test) {
 exports.testModuleInSubdirectory = function(test) {
 
 	var concat = require("../src/concat-define");
-
 	var modules = ["internal", "sub/internal", "public"];
-
 	var output = concat("../test/modules/subdirectory", modules);
-
 	var fileSystem = require("fs");
 
 	fileSystem.readFile("test/builds/subdirectory.js", "utf-8", function(error, data) {

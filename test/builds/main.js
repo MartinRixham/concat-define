@@ -12,7 +12,7 @@
 	}
 })(function(context) {
 
-	context = context || {};
+	context = context || function() { return context.Hello.apply(this, arguments); };
 
 	context.Hello = (function () {
 
