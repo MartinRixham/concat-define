@@ -31,16 +31,19 @@
 
 The two modules above combine to give the following output:
 
-    (function (factory) {
+    (function(factory) {
 
-        if (typeof define === "function" && define.amd) {
+     	if (typeof define === "function" && define.amd) {
 
-            define(factory);
-        } else {
+     		define([], factory);
+     	} else if (typeof module === "object" && module.exports) {
 
-            factory(window);
-        }
-    })(function(context) {
+     		module.exports = factory();
+     	} else {
+
+     		factory(this);
+     	}
+     })(function(context) {
 
         context = context || {};
 
