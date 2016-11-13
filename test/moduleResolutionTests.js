@@ -22,11 +22,9 @@ exports.testPrintingTwoModules = function(test) {
 
 		errorMessage = error.message;
 	}
-	finally {
 
-		test.strictEqual(errorMessage, "One and Two are vertices on a dependency cycle.");
-		test.done();
-	}
+	test.strictEqual(errorMessage, "One and Two are vertices on a dependency cycle.");
+	test.done();
 };
 
 exports.testMissingModule = function(test) {
@@ -42,11 +40,9 @@ exports.testMissingModule = function(test) {
 
 		errorMessage = error.message;
 	}
-	finally {
 
-		test.strictEqual(errorMessage, "Could not find module thingy.");
-		test.done();
-	}
+	test.strictEqual(errorMessage, "Could not find module thingy.");
+	test.done();
 };
 
 exports.testModuleInWrongDirectory = function(test) {
@@ -63,17 +59,15 @@ exports.testModuleInWrongDirectory = function(test) {
 
 		errorMessage = error.message;
 	}
-	finally {
 
-		test.strictEqual(errorMessage, "Could not find module ../internal.");
-		test.done();
-	}
+	test.strictEqual(errorMessage, "Could not find module ../internal.");
+	test.done();
 };
 
 exports.testModuleInSubdirectory = function(test) {
 
 	var concat = require("../src/concat-define");
-	var modules = ["internal", "sub/internal", "public"];
+	var modules = ["sub/internal", "public", "sub/sub/internal"];
 	var output = concat("../test/modules/subdirectory", modules);
 	var fileSystem = require("fs");
 

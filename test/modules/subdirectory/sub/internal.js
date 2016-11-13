@@ -1,4 +1,4 @@
-define(["internal"], function (InternalOne) {
+define(["sub/sub/internal"], function (InternalOne) {
 
 	function InternalTwo() {
 

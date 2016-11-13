@@ -14,7 +14,7 @@
 
 	context = context || {};
 
-	var internal = (function () {
+	var sub_sub_internal = (function () {
 
 		function InternalOne() {
 
@@ -38,7 +38,7 @@
 		}
 
 		return InternalTwo;
-	})(internal);
+	})(sub_sub_internal);
 
 	context.Public = (function (InternalTwo) {
 
