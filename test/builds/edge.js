@@ -3,10 +3,12 @@
 	if (typeof define === "function" && define.amd) {
 
 		define([], factory);
-	} else if (typeof module === "object" && module.exports) {
+	}
+	else if (typeof module === "object" && module.exports) {
 
 		module.exports = factory();
-	} else {
+	}
+	else {
 
 		factory(this);
 	}
