@@ -1,5 +1,9 @@
 module.exports = function(factory, dependencies, path) {
 
+	var dependants = [];
+
+	var independants = [];
+
 	this.getIdentifier = function() {
 
 		if (isPublic()) {
@@ -100,7 +104,29 @@ module.exports = function(factory, dependencies, path) {
 
 	this.dependsOn = function(other) {
 
-		return self == other || dependencies.dependOn(other);
+		if (dependants.indexOf(other) >= 0) {
+
+			return true;
+		}
+		else if (independants.indexOf(other) >= 0) {
+
+			return false;
+		}
+		else {
+
+			var depends = self == other || dependencies.dependOn(other);
+
+			if (depends) {
+
+				dependants.push(other);
+			}
+			else {
+
+				independants.push(other);
+			}
+
+			return depends;
+		}
 	};
 
 	this.setEqualTo = function(equal) {
