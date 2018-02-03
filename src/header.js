@@ -10,6 +10,11 @@ module.exports = function(factory) {
 	}
 	else {
 
-		factory(this);
+		var result = factory();
+
+		for (var key in result) {
+
+			this[key] = result[key];
+		}
 	}
 };

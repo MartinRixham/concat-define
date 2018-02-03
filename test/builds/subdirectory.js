@@ -10,11 +10,16 @@
 	}
 	else {
 
-		factory(this);
-	}
-})(function(context) {
+		var result = factory();
 
-	context = context || {};
+		for (var key in result) {
+
+			this[key] = result[key];
+		}
+	}
+})(function() {
+
+	var context = {};
 
 	var sub_sub_internal = (function () {
 

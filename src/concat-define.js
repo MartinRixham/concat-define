@@ -19,9 +19,9 @@ module.exports = function(rootDirectory, moduleFiles, mainFunction) {
 	}
 
 	text +=
-		")(function(context) {\n" +
+		")(function() {\n" +
 		"\n" +
-			"\tcontext = context || " + context + ";\n" +
+			"\tvar context = " + context + ";\n" +
 		"\n";
 
 	var Define = require("./Define");
