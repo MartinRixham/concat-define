@@ -19,13 +19,15 @@
 	}
 })(function() {
 
-	var context = function() { return context.Hello.apply(this, arguments); };
+	var context = {};
+
+	context = function() { return context.Hello.apply(this, arguments); };
 
 	context.Hello = (function () {
 
-		return {
+		return function() {
 
-			hello: "Hello world."
+			this.hello = function() { return "Hello world."; };
 		}
 	})();
 

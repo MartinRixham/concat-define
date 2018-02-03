@@ -6,23 +6,19 @@ module.exports = function(rootDirectory, moduleFiles, mainFunction) {
 
 	text += header.toString();
 
-	var context;
-
-	if (mainFunction) {
-
-		context =
-			"function() { return context." + mainFunction + ".apply(this, arguments); }";
-	}
-	else {
-
-		context = "{}";
-	}
-
 	text +=
 		")(function() {\n" +
 		"\n" +
-			"\tvar context = " + context + ";\n" +
+			"\tvar context = {};\n" +
 		"\n";
+
+	if (mainFunction) {
+
+		text +=
+			"\tcontext = function() { return context." +
+			mainFunction +
+			".apply(this, arguments); };\n\n";
+	}
 
 	var Define = require("./Define");
 

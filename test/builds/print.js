@@ -23,9 +23,9 @@
 
 	context.Hello = (function () {
 
-		return {
+		return function() {
 
-			hello: "Hello world."
+			this.hello = function() { return "Hello world."; };
 		}
 	})();
 
