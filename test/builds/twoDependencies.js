@@ -2,26 +2,24 @@
 
 	if (typeof define === "function" && define.amd) {
 
-		define([], factory);
+		define(["cats", "cups"], factory);
 	}
 	else if (typeof module === "object" && module.exports) {
 
-		module.exports = factory();
+		module.exports = factory(require("cats"), require("cups"));
 	}
 	else {
 
-		var result = factory();
+		var result = factory(cats, cups);
 
 		for (var key in result) {
 
 			this[key] = result[key];
 		}
 	}
-})(function() {
+})(function(cats, cups) {
 
 	var context = {};
-
-	context = function() { return context.Hello.apply(this, arguments); };
 
 	context.Hello = (function () {
 

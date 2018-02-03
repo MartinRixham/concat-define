@@ -16,7 +16,7 @@ exports.testPrintingTwoModules = function(test) {
 
 	try {
 
-		concat("../test/modules/circular", modules);
+		concat("../test/modules/circular", modules, {});
 	}
 	catch (error) {
 
@@ -34,7 +34,7 @@ exports.testMissingModule = function(test) {
 
 	try {
 
-		concat("../test/modules/missing", ["One"]);
+		concat("../test/modules/missing", ["One"], {});
 	}
 	catch (error) {
 
@@ -53,7 +53,7 @@ exports.testModuleInWrongDirectory = function(test) {
 
 	try {
 
-		concat("../test/modules/wrongDirectory", modules);
+		concat("../test/modules/wrongDirectory", modules, {});
 	}
 	catch (error) {
 
@@ -68,10 +68,48 @@ exports.testModuleInSubdirectory = function(test) {
 
 	var concat = require("../src/concat-define");
 	var modules = ["sub/internal", "public", "sub/sub/internal"];
-	var output = concat("../test/modules/subdirectory", modules);
+	var output = concat("../test/modules/subdirectory", modules, {});
 	var fileSystem = require("fs");
 
 	fileSystem.readFile("test/builds/subdirectory.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};
+
+exports.testPrintingModuleWithExternalDependency = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var output =
+		concat(
+			"../test/modules/print",
+			["index"],
+			{ externalDependencies: ["cats"] });
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile("test/builds/dependency.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};
+
+exports.testPrintingModuleWithTwoExternalDependencies = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var output =
+		concat(
+			"../test/modules/print",
+			["index"],
+			{ externalDependencies: ["cats", "cups"] });
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile("test/builds/twoDependencies.js", "utf-8", function(error, data) {
 
 		test.strictEqual(output, data);
 		test.done();

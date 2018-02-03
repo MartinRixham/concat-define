@@ -1,4 +1,4 @@
-(function (factory) {
+(function(factory) {
 
 	if (typeof define === "function" && define.amd) {
 
@@ -26,7 +26,7 @@
 		return function() {
 
 			this.hello = function() { return "Hello world."; };
-		}
+		};
 	})();
 
 	return context;

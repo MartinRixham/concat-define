@@ -1,22 +1,23 @@
-module.exports = function(rootDirectory, moduleFiles, mainFunction) {
+module.exports = function(rootDirectory, moduleFiles, options) {
 
+	var Header = require("./Header");
+
+	var externalDependencies = options.externalDependencies || [];
 	var text = "(";
 
-	var header = require("./header");
-
-	text += header.toString();
+	text += new Header(externalDependencies).toString();
 
 	text +=
-		")(function() {\n" +
+		")(function(" + externalDependencies.join(", ") + ") {\n" +
 		"\n" +
 			"\tvar context = {};\n" +
 		"\n";
 
-	if (mainFunction) {
+	if (options.mainFunction) {
 
 		text +=
 			"\tcontext = function() { return context." +
-			mainFunction +
+			options.mainFunction +
 			".apply(this, arguments); };\n\n";
 	}
 
