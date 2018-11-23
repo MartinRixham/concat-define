@@ -18,13 +18,13 @@ module.exports = function(grunt) {
 		},
 		nodeunit: {
 
-			all: ['test/*.js']
+			all: ["test/*.js"]
 		}
 	});
 
 	grunt.loadNpmTasks("grunt-contrib-jshint");
 	grunt.loadNpmTasks("grunt-jscs");
-	grunt.loadNpmTasks('grunt-contrib-nodeunit');
+	grunt.loadNpmTasks("grunt-contrib-nodeunit");
 
 	grunt.registerTask("default", ["jshint", "jscs", "nodeunit"]);
 };
