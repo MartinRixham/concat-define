@@ -24,7 +24,7 @@ exports.testPrintingModule = function(test) {
 exports.testPrintingModuleWithMainFunction = function(test) {
 
 	var concat = require("../src/concat-define");
-	var output = concat("../test/modules/print", ["index"], { mainFunction: "Hello" });
+	var output = concat("../test/modules/print", ["index"], { main: "Hello" });
 	var fileSystem = require("fs");
 
 	fileSystem.readFile("test/builds/main.js", "utf-8", function(error, data) {

@@ -13,11 +13,11 @@ module.exports = function(rootDirectory, moduleFiles, options) {
 			"\tvar context = {};\n" +
 		"\n";
 
-	if (options.mainFunction) {
+	if (options.main) {
 
 		text +=
 			"\tcontext = function() { return context." +
-			options.mainFunction +
+			options.main +
 			".apply(this, arguments); };\n\n";
 	}
 
