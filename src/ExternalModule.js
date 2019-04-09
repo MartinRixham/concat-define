@@ -9,4 +9,9 @@ module.exports = function(name) {
 
 		return false;
 	};
+
+	this.hasPath = function(path) {
+
+		return path.getModuleName() == name;
+	};
 };
