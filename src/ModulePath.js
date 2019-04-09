@@ -2,7 +2,7 @@ module.exports = function(filePath) {
 
 	this.getModuleName = function() {
 
-		path = require("path");
+		var path = require("path");
 
 		return path.normalize(filePath);
 	};

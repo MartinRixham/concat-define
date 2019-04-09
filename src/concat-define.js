@@ -2,6 +2,8 @@ module.exports = function(rootDirectory, moduleFiles, options) {
 
 	var Header = require("./Header");
 
+	var Define = require("./Define");
+
 	var externalDependencies = options.externalDependencies || [];
 	var text = "(";
 
@@ -21,9 +23,8 @@ module.exports = function(rootDirectory, moduleFiles, options) {
 			".apply(this, arguments); };\n\n";
 	}
 
-	var Define = require("./Define");
-
-	var modules = new Define(rootDirectory, moduleFiles).getModules();
+	var modules =
+		new Define(rootDirectory, moduleFiles, externalDependencies).getModules();
 
 	modules.getModuleStrings().forEach(function(moduleString) {
 

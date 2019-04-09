@@ -1,4 +1,4 @@
-module.exports = function(rootDirectory, moduleFiles) {
+module.exports = function(rootDirectory, moduleFiles, externalDependencies) {
 
 	var FilePath = require("./FilePath");
 
@@ -28,7 +28,7 @@ module.exports = function(rootDirectory, moduleFiles) {
 			var module =
 				new Module(
 					factory,
-					new Dependencies(paths, modules),
+					new Dependencies(paths, modules, externalDependencies),
 					getFilePath(new Error()));
 
 			modules.push(module);

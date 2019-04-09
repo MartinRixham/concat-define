@@ -115,3 +115,23 @@ exports.testPrintingModuleWithTwoExternalDependencies = function(test) {
 		test.done();
 	});
 };
+
+exports.testPrintingModuleWithExternalDependencyExplicitlyRequired = function(test) {
+
+	var concat = require("../src/concat-define");
+
+	var output =
+		concat(
+			"../test/modules/external",
+			["index"],
+			{ externalDependencies: ["cats"] });
+
+	var fileSystem = require("fs");
+
+	fileSystem.readFile(
+		"test/builds/explicitDependency.js", "utf-8", function(error, data) {
+
+		test.strictEqual(output, data);
+		test.done();
+	});
+};

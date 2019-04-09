@@ -1,10 +1,12 @@
-module.exports = function(dependencyPaths, modules) {
+var ExternalDependency = require("./ExternalDependency");
+
+module.exports = function(dependencyPaths, modules, externalDependencies) {
 
 	this.getIdentifiers = function() {
 
-		var dependencies = getDependencyModules();
+		var dependencyModules = getDependencyModules();
 
-		return dependencies.map(function(module) {
+		return dependencyModules.map(function(module) {
 
 			return module.getIdentifier();
 		});
@@ -12,49 +14,44 @@ module.exports = function(dependencyPaths, modules) {
 
 	this.dependOn = function(other) {
 
-		var dependencies = getDependencyModules();
+		return getDependencyModules().some(function(dependency) {
 
-		for (var i = 0; i < dependencies.length; i++) {
-
-			if (dependencies[i].dependsOn(other)) {
-
-				return true;
-			}
-		}
-
-		return false;
+			return dependency.dependsOn(other);
+		});
 	};
 
 	function getDependencyModules() {
 
-		var dependencyModules = [];
+		return dependencyPaths.map(findModule);
+	}
 
-		for (var i = 0; i < dependencyPaths.length; i++) {
+	function findModule(path) {
 
-			var path = dependencyPaths[i];
+		for (var j = 0; j < modules.length; j++) {
 
-			for (var j = 0; j < modules.length; j++) {
+			var module = modules[j];
 
-				var module = modules[j];
+			if (module.hasPath(path)) {
 
-				if (module.hasPath(path)) {
-
-					dependencyModules.push(module);
-
-					break;
-				}
-				else if (j == modules.length - 1) {
-
-					var message =
-						"Could not find module " +
-						path.getModuleName() +
-						".";
-
-					throw new Error(message);
-				}
+				return module;
 			}
 		}
 
-		return dependencyModules;
+		for (var i = 0; i < externalDependencies.length; i++) {
+
+			var library = externalDependencies[i];
+
+			if (path.getModuleName() == library) {
+
+				return new ExternalDependency(library);
+			}
+		}
+
+		var message =
+			"Could not find module " +
+			path.getModuleName() +
+			".";
+
+		throw new Error(message);
 	}
 };

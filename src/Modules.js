@@ -4,9 +4,7 @@ module.exports = function(modules) {
 
 		modules.sort(function(a, b) { return a.compareTo(b); });
 
-		var moduleStrings = [];
-
-		modules.forEach(function(module) {
+		return modules.map(function(module) {
 
 			var moduleString = module.getFactoryString();
 
@@ -14,9 +12,7 @@ module.exports = function(modules) {
 
 			moduleString += "(" + dependencyIdentifiers.join(", ") + ");";
 
-			moduleStrings.push(moduleString);
+			return moduleString;
 		});
-
-		return moduleStrings;
 	};
 };
