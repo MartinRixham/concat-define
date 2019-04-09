@@ -1,14 +1,14 @@
+var FilePath = require("./FilePath");
+
+var ModulePath = require("./ModulePath");
+
+var Dependencies = require("./Dependencies");
+
+var Module = require("./Module");
+
+var Modules = require("./Modules");
+
 module.exports = function(rootDirectory, moduleFiles, externalDependencies) {
-
-	var FilePath = require("./FilePath");
-
-	var ModulePath = require("./ModulePath");
-
-	var Dependencies = require("./Dependencies");
-
-	var Module = require("./Module");
-
-	var Modules = require("./Modules");
 
 	this.getModules = function() {
 

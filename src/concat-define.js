@@ -1,8 +1,8 @@
+var Header = require("./Header");
+
+var Define = require("./Define");
+
 module.exports = function(rootDirectory, moduleFiles, options) {
-
-	var Header = require("./Header");
-
-	var Define = require("./Define");
 
 	var externalDependencies = options.externalDependencies || [];
 	var text = "(";
