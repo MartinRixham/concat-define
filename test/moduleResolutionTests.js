@@ -131,7 +131,7 @@ exports.testPrintingModuleWithExternalDependencyExplicitlyRequired = function(te
 	fileSystem.readFile(
 		"test/builds/explicitDependency.js", "utf-8", function(error, data) {
 
-		test.strictEqual(output, data);
-		test.done();
-	});
+			test.strictEqual(output, data);
+			test.done();
+		});
 };
