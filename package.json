@@ -1,6 +1,6 @@
 {
   "name": "concat-define",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "main": "src/concat-define.js",
   "dependencies": {},
   "devDependencies": {
