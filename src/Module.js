@@ -77,10 +77,8 @@ module.exports = function(factory, dependencies, path) {
 		if (dependsForwards && dependsBackwards) {
 
 			var message =
-				path.getModuleName() +
-				" and " +
-				other.getName() +
-				" are vertices on a dependency cycle.";
+				path.getModuleName() + " and " +
+				other.getName() + " are vertices on a dependency cycle.";
 
 			throw new Error(message);
 		}
@@ -96,7 +94,7 @@ module.exports = function(factory, dependencies, path) {
 
 			this.setDependsOn(other);
 
-			return 0;
+			return 1;
 		}
 	};
 
