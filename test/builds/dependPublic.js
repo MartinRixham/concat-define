@@ -38,8 +38,8 @@
 
 		return {
 
-			public : new PublicOne().hello()
-		}
+			public: new PublicOne().hello()
+		};
 	})(context.PublicOne);
 
 	return context;

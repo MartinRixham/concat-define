@@ -2,7 +2,7 @@ module.exports = function(factory, dependencies, path) {
 
 	var dependants = [];
 
-	var independants = [];
+	var independents = [];
 
 	this.getIdentifier = function() {
 
@@ -94,7 +94,7 @@ module.exports = function(factory, dependencies, path) {
 		}
 		else {
 
-			this.setEqualTo(other);
+			this.setDependsOn(other);
 
 			return 0;
 		}
@@ -108,7 +108,7 @@ module.exports = function(factory, dependencies, path) {
 
 			return true;
 		}
-		else if (independants.indexOf(other) >= 0) {
+		else if (independents.indexOf(other) >= 0) {
 
 			return false;
 		}
@@ -122,21 +122,21 @@ module.exports = function(factory, dependencies, path) {
 			}
 			else {
 
-				independants.push(other);
+				independents.push(other);
 			}
 
 			return depends;
 		}
 	};
 
-	this.setEqualTo = function(equal) {
+	this.setDependsOn = function(module) {
 
 		var originalDependsOn = this.dependsOn;
-		var equalOriginalDependsOn = equal.dependsOn;
+		var otherDependsOn = module.dependsOn;
 
-		equal.dependsOn = this.dependsOn = function(other) {
+		this.dependsOn = function(other) {
 
-			return originalDependsOn(other) || equalOriginalDependsOn(other);
+			return originalDependsOn(other) || otherDependsOn(other);
 		};
 	};
 };

@@ -23,7 +23,7 @@ exports.testPrintingTwoModules = function(test) {
 		errorMessage = error.message;
 	}
 
-	test.strictEqual(errorMessage, "One and Two are vertices on a dependency cycle.");
+	test.strictEqual(errorMessage, "Two and One are vertices on a dependency cycle.");
 	test.done();
 };
 
